@@ -1,0 +1,59 @@
+<!-- <div class="background">
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-4 col-md-12">
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
+          <div class="form-floating mb-4">
+            <input type="email" class="form-control" id="usernameInput" formControlName="username" placeholder="name@example.com">
+            <label for="usernameInput">Username</label>
+          </div>
+      
+          <div class="form-floating mb-4">
+            <input type="password" class="form-control" id="passwordInput" formControlName="password" placeholder="Password">
+            <label for="passwordInput">Password</label>
+          </div>
+          <div class="text-danger" *ngIf="loginError">
+            {{ loginError }}
+          </div>
+      
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Log In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col col-lg-4"></div>
+    <div class="col col-lg-4 col-md-12 border rounded p-4">
+      <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+        <div class="form-floating mb-4">
+          <input type="email" class="form-control" id="usernameInput" formControlName="username"
+            placeholder="name@example.com" 
+            [ngClass]="{ 'is-invalid': isFormSubmitted && loginForm.get('username')!.hasError('required') }"
+            required>
+          <label for="usernameInput">Username</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="password" class="form-control" id="passwordInput" formControlName="password"
+            placeholder="Password" 
+            [ngClass]="{ 'is-invalid': isFormSubmitted && loginForm.get('password')!.hasError('required') }"
+            required>
+          <label for="passwordInput">Password</label>
+        </div>
+        <div class="text-danger" *ngIf="loginError">
+          {{ loginError }}
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
