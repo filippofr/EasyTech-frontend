@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "https://easytechcorp.azurewebsites.net",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

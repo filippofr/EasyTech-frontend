@@ -1,22 +1,46 @@
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar bg-body-tertiary navbar-expand">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="#" [routerLink]="['home']">
       <img src="../../../assets/images/axera-logo-notext.svg" alt="Logo" width="30" height="24"
         class="d-inline-block align-text-top">
       Axera
     </a>
-    <ul class="navbar-nav mb-2 mb-lg-0">
-      <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end" *ngIf="(currentUser$ | async)">
-        <a class="nav-link p-0" tabindex="0" ngbDropdownToggle role="button">
-          {{user!.fullName}}
-        </a>
-        <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
-          <a ngbDropdownItem href="#" (click)="logout()">Logout</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['login']" *ngIf="!(currentUser$ | async)">Log In</a>
-      </li>
-    </ul>
+    <!-- <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item" ngbDropdown display="dynamic" *ngIf="(currentUser$ | async)">
+          <a class="nav-link p-0" tabindex="0" ngbDropdownToggle role="button">
+            Corsi
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+            <a ngbDropdownItem href="#" *ngFor="let course of courses | async">{{course.title}}</a>
+          </div>
+        </li>
+      </ul>
+    </div> -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" role="button" *ngIf="(currentUser$ | async)" (click)="openEnd(content)">
+            <i class="bi bi-bell-fill me-1"></i>Avvisi
+          </a>
+        </li>
+        <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end" *ngIf="(currentUser$ | async)">
+          <a class="nav-link " tabindex="0" ngbDropdownToggle role="button">
+            {{user!.fullName}}
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+            <a ngbDropdownItem href="#" (click)="logout()">Logout</a>
+          </div>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['login']" *ngIf="!(currentUser$ | async)">Log In</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
+
+<ng-template #content>
+  <app-notifications></app-notifications>
+</ng-template>

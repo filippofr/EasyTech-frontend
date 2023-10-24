@@ -13,12 +13,12 @@ const routes: Routes = [
   {
     path: 'home',
     component: ListCoursesComponent,
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'course',
     component: CourseComponent,
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   {
     path: '',

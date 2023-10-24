@@ -11,7 +11,7 @@ export class AuthService implements OnInit {
   private _currentUser$ = new BehaviorSubject<User | null>(null);
   currentUser$ = this._currentUser$.asObservable();
 
-  apiUrl = '';
+  apiUrl = 'http://localhost:3000';
   constructor(
     private jwtSrv: JWTService,
     private http: HttpClient,
@@ -20,7 +20,6 @@ export class AuthService implements OnInit {
     if (this.isLoggedIn()) {
       this.fetchUser();
     }
-
   }
 
 
@@ -35,7 +34,7 @@ export class AuthService implements OnInit {
   }
 
   login(username: string, password: string) {
-    return this.http.post<{ user: User, token: string }>(this.apiUrl + '/api/login', { username, password })
+    return this.http.post<{ user: User, token: string }>('/api/login', { username, password })
       .pipe(
         tap(res => this.jwtSrv.setBankId(res.user.id!)),
         tap(res => this.jwtSrv.setToken(res.token)),
@@ -48,7 +47,7 @@ export class AuthService implements OnInit {
     this.jwtSrv.removeToken();
     this.jwtSrv.removeBankId();
     this._currentUser$.next(null);
-    this.router.navigate(['home']);
+    this.router.navigate(['login']);
   }
 
   userLogedIn() {
@@ -56,7 +55,7 @@ export class AuthService implements OnInit {
   }
 
   private fetchUser() {
-    this.http.get<User>(this.apiUrl + '/api/users/me')
+    this.http.get<User>('/api/users/me')
       .subscribe(user => this._currentUser$.next(user));
   }
 }

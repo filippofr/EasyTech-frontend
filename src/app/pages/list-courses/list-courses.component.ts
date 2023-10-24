@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CoursesService } from 'src/app/services/courses.service';
 
 @Component({
   selector: 'app-list-courses',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-courses.component.css']
 })
 export class ListCoursesComponent {
+  courses = this.courseSrv.listCourses();
 
+  constructor(private courseSrv: CoursesService) { }
 }

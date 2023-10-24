@@ -1,1 +1,8 @@
-<p>list-courses works!</p>
+<div class="container text-center mt-5">
+  <div class="row row-cols-3">
+    <div class="col mt-3" *ngFor="let course of courses|async">
+      <app-course-card [course]="course"
+      ></app-course-card>
+    </div>
+  </div>
+</div>

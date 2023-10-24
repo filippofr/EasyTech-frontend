@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+:root{
+    --primary : hsl(20, 84%, 52%);
+    --primary-hover : hsla(20, 84%, 52%, 0.663);
+    --primary-active : hsl(20, 100%, 50%);
+}
+
+.btn-primary{
+    background-color: var(--primary);
+    border-color: var(--primary)!important;
+}
+.btn-primary:active{
+    background-color: var(--primary)!important;
+}
+.btn-primary:hover{
+    background-color: var(--primary-hover);
+}

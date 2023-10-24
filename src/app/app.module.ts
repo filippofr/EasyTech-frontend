@@ -9,20 +9,26 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoginComponent } from './pages/login/login.component';
-import { ListCoursesComponent } from './pages/list-courses/list-courses.component';
 import { CourseComponent } from './pages/course/course.component';
 import { PartecipantComponent } from './components/partecipant/partecipant.component';
 import { PartecipantDetailComponent } from './components/partecipant-detail/partecipant-detail.component';
+import { WaitingListComponent } from './components/waiting-list/waiting-list.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { CourseCardComponent } from './components/course-card/course-card.component';
+import { ListCoursesComponent } from './pages/list-courses/list-courses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     LoginComponent,
-    ListCoursesComponent,
     CourseComponent,
     PartecipantComponent,
-    PartecipantDetailComponent
+    PartecipantDetailComponent,
+    WaitingListComponent,
+    NotificationsComponent,
+    CourseCardComponent,
+    ListCoursesComponent
   ],
   imports: [
     BrowserModule,
