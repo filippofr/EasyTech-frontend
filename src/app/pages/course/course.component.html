@@ -1,5 +1,6 @@
 <div class="container mt-5">
-  <h1 *ngIf="courseName">{{courseName}}</h1>
+  <h1 class="inline" *ngIf="courseName">{{courseName}}</h1>
+  <h5 class="inline ms-3" *ngIf="courseStart">Inizio: {{courseStart | date: 'shortDate'}}</h5>
 
   <table class="table table-striped align-middle">
     <thead>
@@ -15,26 +16,31 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let parts of partecipants; index as i">
+      <!-- <app-partecipant *ngFor="let part of partecipants; index as i" [i]="i" [part]="part"></app-partecipant> -->
+      <tr role="button" (click)="open(part)" *ngFor="let part of partecipants; index as i">
+        <!-- <app-partecipant [i]="i" [part]="part" ></app-partecipant> -->
         <th>{{i+1}}</th>
-        <td>{{parts.lastName}} {{parts.firstName}}</td>
-        <td>{{parts.age}}</td>
-        <td>{{parts.axeraCode}}</td>
+        <td>{{part.lastName}} {{part.firstName}}</td>
+        <td>{{part.age}}</td>
+        <td>{{part.axeraCode}}</td>
         <td>
-          <input class="form-check-input" type="checkbox" [checked]="parts.paymentDone">
+          <input class="form-check-input" type="checkbox" [checked]="part.paymentDone">
         </td>
         <td>
-          <input class="form-check-input" type="checkbox" [checked]="parts.privacyAccepted">
+          <input class="form-check-input" type="checkbox" [checked]="part.privacyAccepted">
         </td>
         <td>
-          <input class="form-check-input" type="checkbox" [checked]="parts.imageReleaseAccepted">
+          <input class="form-check-input" type="checkbox" [checked]="part.imageReleaseAccepted">
         </td>
         <td>
-          <input class="form-check-input" type="checkbox" [checked]="parts.iscriptionForm">
+          <input class="form-check-input" type="checkbox" [checked]="part.iscriptionForm">
         </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="text-center mt-3" *ngIf="!partecipants.length">
+    Nessuno parteciante da visualizzare
+  </h5>
 
   <!-- <h2 class="mt-5" type="button" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
     aria-controls="collapseExample">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Partecipant18 } from 'src/app/interfaces/partecipant18';
 import { PartecipantsService } from 'src/app/services/partecipants.service';
 
@@ -9,14 +9,11 @@ import { PartecipantsService } from 'src/app/services/partecipants.service';
 })
 export class PartecipantComponent {
 
-  partecipants: Partecipant18[] = [];
+  @Input()
+  part!: Partecipant18;
 
-  constructor(private partecipantsSrv: PartecipantsService) {
-    partecipantsSrv.partecipants$.subscribe(parts => {
-      if (parts) {
-        this.partecipants = parts;
-        console.log(parts);
-      }
-    })
-  }
+  @Input()
+  i!: number;
+
+  constructor() { }
 }

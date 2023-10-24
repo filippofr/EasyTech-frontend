@@ -1,16 +1,18 @@
-<tr *ngFor="let parts of partecipants; index as i">
+<tr>
   <th>{{i+1}}</th>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
-  <td>{{parts.lastName}}</td>
+  <td>{{part.lastName}} {{part.firstName}}</td>
+  <td>{{part.age}}</td>
+  <td>{{part.axeraCode}}</td>
+  <td>
+    <input class="form-check-input" type="checkbox" [checked]="part.paymentDone">
+  </td>
+  <td>
+    <input class="form-check-input" type="checkbox" [checked]="part.privacyAccepted">
+  </td>
+  <td>
+    <input class="form-check-input" type="checkbox" [checked]="part.imageReleaseAccepted">
+  </td>
+  <td>
+    <input class="form-check-input" type="checkbox" [checked]="part.iscriptionForm">
+  </td>
 </tr>

@@ -1,1 +1,14 @@
-<p>partecipant-detail works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">Dettaglio partecipante</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <div class="label">Indirizzo:</div>
+  <p class="ms-3">{{ partecipant.address}}</p>
+  <div class="label">Codice Fiscale:</div>
+  <p class="ms-3">{{ partecipant.nationalInsuranceNumber }}</p>
+  <div class="label">Email:</div>
+  <p class="ms-3">{{ partecipant.email }}</p>
+  <div class="label">Telefono:</div>
+  <p class="ms-3">{{ partecipant.telephoneNumber }}</p>
+</div>
