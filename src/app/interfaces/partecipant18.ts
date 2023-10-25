@@ -15,5 +15,6 @@ export interface Partecipant18 {
     imageReleaseAccepted: boolean
     paymentDone: boolean
     paymentVerified: boolean
+    date: Date
     id: string
 }

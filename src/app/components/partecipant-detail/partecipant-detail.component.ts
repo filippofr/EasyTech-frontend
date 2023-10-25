@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Partecipant18 } from 'src/app/interfaces/partecipant18';
+import { PartecipantsService } from 'src/app/services/partecipants.service';
 
 @Component({
   selector: 'app-partecipant-detail',
@@ -9,7 +10,18 @@ import { Partecipant18 } from 'src/app/interfaces/partecipant18';
 })
 export class PartecipantDetailComponent {
   @Input()
-  partecipant!: Partecipant18;
+  partecipant!: any;
 
-  constructor(public activeModal: NgbActiveModal) { }
+  @Input()
+  listaMinori!: boolean
+
+  constructor(public activeModal: NgbActiveModal,
+    private partecipantsSrv: PartecipantsService) { }
+
+  updateDocumentP(event: any, parentId: string) {
+    this.partecipantsSrv.updateParent(parentId, String(event.target.checked))
+  }
+  updateDocumentD(event: any, delegateId: string) {
+    this.partecipantsSrv.updateDelegate(delegateId, String(event.target.checked))
+  }
 }

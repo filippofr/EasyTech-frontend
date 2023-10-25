@@ -11,4 +11,54 @@
   <p class="ms-3">{{ partecipant.email }}</p>
   <div class="label">Telefono:</div>
   <p class="ms-3">{{ partecipant.telephoneNumber }}</p>
+  <div *ngIf="listaMinori">
+    <h5 class="label">Genitore</h5>
+    <div class="ms-3">
+      <div class="label">Nome:</div>
+      <p class="ms-3">{{ partecipant.parent.firstName }} {{ partecipant.parent.lastName }}</p>
+      <div class="label">Codice Fiscale:</div>
+      <p class="ms-3">{{ partecipant.parent.nationalInsuranceNumber }}</p>
+      <div class="label">Email:</div>
+      <p class="ms-3">{{ partecipant.parent.email }}</p>
+      <div class="label">Telefono:</div>
+      <p class="ms-3">{{ partecipant.parent.telephoneNumber }}</p>
+      <div class="label">Indirizzo:</div>
+      <p class="ms-3">{{ partecipant.parent.address }}</p>
+      <input class="form-check-input ms-3" type="checkbox" [checked]="partecipant.parent.documentCopy"
+        (change)="updateDocumentP($event, partecipant.parent.id)">
+      <label class="form-check-label ms-1">
+        Documenti
+      </label>
+    </div>
+    <h5 class="label mt-2">Delegati</h5>
+    <div class="ms-3">
+      <div *ngIf="partecipant.delegate1">
+        <div class="label">Nome:</div>
+        <p class="ms-3">{{ partecipant.delegate1.firstName }} {{ partecipant.delegate1.lastName }}</p>
+        <input class="form-check-input ms-3" type="checkbox" [checked]="partecipant.delegate1.documentCopy"
+          (change)="updateDocumentD($event, partecipant.delegate1.id)">
+        <label class="form-check-label ms-1">
+          Documenti
+        </label>
+      </div>
+      <div *ngIf="partecipant.delegate2">
+        <div class="label">Nome:</div>
+        <p class="ms-3">{{ partecipant.delegate2.firstName }} {{ partecipant.delegate2.lastName }}</p>
+        <input class="form-check-input ms-3" type="checkbox" [checked]="partecipant.delegate2.documentCopy"
+          (change)="updateDocumentD($event, partecipant.delegate2.id)">
+        <label class="form-check-label ms-1">
+          Documenti
+        </label>
+      </div>
+      <div *ngIf="partecipant.delegate3">
+        <div class="label">Nome:</div>
+        <p class="ms-3">{{ partecipant.delegate3.firstName }} {{ partecipant.delegate3.lastName }}</p>
+        <input class="form-check-input ms-3" type="checkbox" [checked]="partecipant.delegate3.documentCopy"
+          (change)="updateDocumentD($event, partecipant.delegate3.id)">
+        <label class="form-check-label ms-1">
+          Documenti
+        </label>
+      </div>
+    </div>
+  </div>
 </div>

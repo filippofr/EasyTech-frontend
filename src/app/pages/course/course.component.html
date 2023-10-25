@@ -1,43 +1,67 @@
 <div class="container mt-5">
-  <h1 class="inline" *ngIf="courseName">{{courseName}}</h1>
-  <h5 class="inline ms-3" *ngIf="courseStart">Inizio: {{courseStart | date: 'shortDate'}}</h5>
+  <div class="inline d-flex mb-3">
+    <h1 *ngIf="courseName">{{courseName}}</h1>
+    <h5 class="ms-3 align-self-end" *ngIf="courseStart">Inizio: {{courseStart | date: 'd/M/yy'}}</h5>
+  </div>
 
-  <table class="table table-striped align-middle">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Partecipante</th>
-        <th scope="col">Età</th>
-        <th scope="col">Cliente</th>
-        <th scope="col">Pagamento</th>
-        <th scope="col">Privacy</th>
-        <th scope="col">Liberatoria</th>
-        <th scope="col">Iscrizione</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- <app-partecipant *ngFor="let part of partecipants; index as i" [i]="i" [part]="part"></app-partecipant> -->
-      <tr role="button" (click)="open(part)" *ngFor="let part of partecipants; index as i">
-        <!-- <app-partecipant [i]="i" [part]="part" ></app-partecipant> -->
-        <th>{{i+1}}</th>
-        <td>{{part.lastName}} {{part.firstName}}</td>
-        <td>{{part.age}}</td>
-        <td>{{part.axeraCode}}</td>
-        <td>
-          <input class="form-check-input" type="checkbox" [checked]="part.paymentDone">
-        </td>
-        <td>
-          <input class="form-check-input" type="checkbox" [checked]="part.privacyAccepted">
-        </td>
-        <td>
-          <input class="form-check-input" type="checkbox" [checked]="part.imageReleaseAccepted">
-        </td>
-        <td>
-          <input class="form-check-input" type="checkbox" [checked]="part.iscriptionForm">
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Partecipante</th>
+          <th scope="col">Età</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Pagamento</th>
+          <th scope="col">Privacy</th>
+          <th scope="col">Liberatoria</th>
+          <th scope="col">Iscrizione</th>
+          <th scope="col" *ngIf="listaMinori">Copia Documeto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <app-partecipant *ngFor="let part of partecipants; index as i" [i]="i" [part]="part"></app-partecipant> -->
+        <tr class="relative" *ngFor="let part of partecipants; index as i">
+
+          <th>{{i+1}}</th>
+          <td role="button" (click)="open(part)">{{part.lastName}} {{part.firstName}}</td>
+          <td>{{part.age}}</td>
+          <td *ngIf="!listaMinori">{{part.axeraCode}}</td>
+          <td *ngIf="listaMinori">{{part.parent.axeraCode}}</td>
+
+          <td>
+            <div class="center-div">
+              <input class="form-check-input" type="checkbox" [checked]="part.paymentDone"
+                (change)="updatePayment($event, part.id)">
+            </div>
+          </td>
+          <td>
+            <div class="center-div">
+              <input class="form-check-input" type="checkbox" [checked]="part.privacyAccepted"
+              (change)="updatePrivacy($event, part.id)">
+            </div>
+          </td>
+          <td>
+            <div class="center-div">
+              <input class="form-check-input" type="checkbox" [checked]="part.imageReleaseAccepted"
+              (change)="updateImgRelease($event, part.id)">
+            </div>
+          </td>
+          <td>
+            <div class="center-div">
+              <input class="form-check-input" type="checkbox" [checked]="part.iscriptionForm"
+              (change)="updateInscription($event, part.id)">
+            </div>
+          </td>
+          <td *ngIf="listaMinori">
+            <div class="center-div">
+              <input class="form-check-input" type="checkbox" [checked]="part.documentCopy"
+              (change)="updateDocument($event, part.id)">
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   <h5 class="text-center mt-3" *ngIf="!partecipants.length">
     Nessuno parteciante da visualizzare
   </h5>
@@ -48,5 +72,5 @@
   </h2>
   <div class="mt-2" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
    <app-waiting-list></app-waiting-list>
-  </div>-->
-</div> 
+  </div> -->
+</div>
