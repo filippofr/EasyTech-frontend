@@ -12,16 +12,16 @@
           <th scope="col">Partecipante</th>
           <th scope="col">Età</th>
           <th scope="col">Cliente</th>
-          <th scope="col">Pagamento</th>
-          <th scope="col">Privacy</th>
-          <th scope="col">Liberatoria</th>
-          <th scope="col">Iscrizione</th>
-          <th scope="col" *ngIf="listaMinori">Copia Documeto</th>
+          <th class="text-center" scope="col">Pagamento</th>
+          <th class="text-center" scope="col">Privacy</th>
+          <th class="text-center" scope="col">Liberatoria</th>
+          <th class="text-center" scope="col">Iscrizione</th>
+          <th class="text-center" scope="col" *ngIf="listaMinori">Copia Documeto</th>
         </tr>
       </thead>
       <tbody>
         <!-- <app-partecipant *ngFor="let part of partecipants; index as i" [i]="i" [part]="part"></app-partecipant> -->
-        <tr class="relative" *ngFor="let part of partecipants; index as i">
+        <tr *ngFor="let part of partecipants; index as i">
 
           <th>{{i+1}}</th>
           <td role="button" (click)="open(part)">{{part.lastName}} {{part.firstName}}</td>
