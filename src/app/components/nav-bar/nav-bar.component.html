@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="#" [routerLink]="['home']">
       <img src="../../../assets/images/axera-logo-notext.svg" alt="Logo" width="30" height="24"
         class="d-inline-block align-text-top">
-      Axera
+      Axera gestionale
     </a>
     <!-- <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav mb-2 mb-lg-0">
@@ -42,5 +42,5 @@
 </nav>
 
 <ng-template #content>
-  <app-notifications></app-notifications>
+  <app-notifications [tipologies]="courses"></app-notifications>
 </ng-template>

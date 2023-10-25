@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import { WaitingListComponent } from './components/waiting-list/waiting-list.com
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { ListCoursesComponent } from './pages/list-courses/list-courses.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ListCoursesComponent } from './pages/list-courses/list-courses.componen
     ReactiveFormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // { provide: LOCALE_ID, useValue: 'it-IT' }
   ],
   bootstrap: [AppComponent]
 })
