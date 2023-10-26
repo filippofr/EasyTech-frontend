@@ -10,42 +10,58 @@ import { PartecipantU } from '../interfaces/partecipantU';
 })
 export class NotificationService {
 
-  private tipologiesSubject = new BehaviorSubject<Tipology[]>([]);
+  private tipologiesSubject = new BehaviorSubject<any[]>([]);
   tipologies$ = this.tipologiesSubject.asObservable();
 
-  constructor(private partecipantsrv: PartecipantsService) {}
+  partecipants: any[] = [];
 
-  updateTipologies(tipologies: Tipology[]) {
-    const updatedTipologies = tipologies.map((tipology) => ({
-      ...tipology,
-      cssClass: this.getCssClass(tipology.startDate, tipology.id)
-    }));
-    this.tipologiesSubject.next(updatedTipologies);
-  }
-
-  private getUsersList(id: string): boolean {
-    let check = true;
-    this.partecipantsrv.listCourses(id);
-    this.partecipantsrv.partecipants$.forEach(function(user) {
-      if (checkValue(user) == false) {
-        check =  false
+  constructor(private partecipantsrv: PartecipantsService) {
+    partecipantsrv.all$.subscribe(parts => {
+      if (parts.length) {
+        this.partecipants = parts;
       }
-    });
-    return check;
+    })
   }
 
-  private getCssClass(startDate: Date, id: string): string {
+  // updateTipologies(tipologies: Tipology[]) {
+  //   const updatedTipologies = tipologies.map((tipology) => ({
+  //     ...tipology,
+  //     cssClass: this.getCssClass(tipology.startDate, tipology.id)
+  //   }));
+  //   this.tipologiesSubject.next(updatedTipologies);
+  // }
+
+  getUserAlert() {
+    const arr: any[] = [];
+    // this.partecipantsrv.listCourses(id);
+    this.partecipants.forEach(user => {
+      // if (checkValue(user) == false) {
+      //   check =  false
+      // }
+      if (!this.check(user)) {
+        arr.push({
+          ...user,
+          cssClass: this.getCssClass(user.tipology.startDate)
+        })
+      }
+
+      this.tipologiesSubject.next(arr);
+    });
+  }
+
+  private check(user: any) {
+    return user.completed ? true : false;
+  }
+
+  private getCssClass(startDate: Date): string {
     startDate = new Date(startDate);
     const today = new Date();
     const timeDifference = startDate.getTime() - today.getTime();
     const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
-    let check = this.getUsersList(id)
-
-    console.log(check);
-    if (daysDifference < 7 && !check) {
+    if (daysDifference < 7 ) {
       return 'danger'; // Red
-    } else if (daysDifference < 14 &&!check) {
+    } else if (daysDifference < 14) {
       return 'warning'; // yellow
     } else if (daysDifference < 21) {
       return 'info'; // blue
@@ -55,7 +71,7 @@ export class NotificationService {
   }
 }
 function checkValue(user: any ): boolean {
-  if(user.iscriptionForm && user.privacyAccepted && user.paymentVerified) {
+  if(!!user.iscriptionForm && !!user.privacyAccepted && !!user.paymentDone) {
     return true;
   } else {
     return false;

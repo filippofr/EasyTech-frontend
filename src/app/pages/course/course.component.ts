@@ -2,10 +2,12 @@ import { Component, OnDestroy, OnInit, ɵclearResolutionOfComponentResourcesQueu
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject, takeUntil } from 'rxjs';
+import { NotFoundError, Subject, takeUntil } from 'rxjs';
 import { PartecipantDetailComponent } from 'src/app/components/partecipant-detail/partecipant-detail.component';
 import { Partecipant18 } from 'src/app/interfaces/partecipant18';
+import { Tipology } from 'src/app/interfaces/tipology';
 import { CoursesService } from 'src/app/services/courses.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { PartecipantsService } from 'src/app/services/partecipants.service';
 
 @Component({
@@ -18,6 +20,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   partecipants: any[] = [];
   courseName = '';
   courseStart!: Date;
+  course!: Tipology;
   listaMinori = false;
 
 
@@ -35,9 +38,12 @@ export class CourseComponent implements OnInit, OnDestroy {
     private courseSrv: CoursesService,
     private router: Router,
     private modalService: NgbModal,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private notifySrv: NotificationService
+  ) {
     courseSrv.course$.subscribe(course => {
       if (course) {
+        this.course = course;
         this.courseName = course.title;
         this.courseStart = course.startDate;
         if (course.id === '6536945f4f594167cf812e00' ||
@@ -51,11 +57,13 @@ export class CourseComponent implements OnInit, OnDestroy {
     })
     partecipantsSrv.partecipants$.subscribe(parts => {
       if (parts.length) {
+        // notifySrv.getUserAlert(this.course);
         this.partecipants = parts;
       } else {
         this.partecipants = [];
       }
     })
+    
   }
 
   ngOnInit(): void {

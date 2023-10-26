@@ -1,11 +1,16 @@
 <div class="offcanvas-header">
   <h4 class="offcanvas-title">Avvisi</h4>
 </div>
-<div class="offcanvas-body">
-  <div *ngFor="let tipology of tipologies | async">
-    <ngb-alert type="{{ tipology.cssClass }}" [dismissible]="false" (click)="redirect(tipology.id)" (auxclick)="redirectNewTab(tipology.id)">
+<div class="offcanvas-body scrollable">
+  <div *ngFor="let user of users | async">
+    <!-- <ngb-alert *ngIf="tipology.title" type="{{ tipology.cssClass }}" [dismissible]="false" (click)="redirect(tipology.id)">
       <div class="row">
         <strong>{{ tipology.title }}</strong>
+      </div>
+    </ngb-alert> -->
+    <ngb-alert [dismissible]="false" type="{{ user.cssClass }}" role="button" (click)="redirect(user.tipology.id)">
+      <div class="row">
+        <strong>{{ user.firstName }} {{ user.lastName }} documenti mancanti</strong>
       </div>
     </ngb-alert>
   </div>

@@ -9,5 +9,6 @@ import { CoursesService } from 'src/app/services/courses.service';
 export class ListCoursesComponent {
   courses = this.courseSrv.listCourses();
 
-  constructor(private courseSrv: CoursesService) { }
+  constructor(private courseSrv: CoursesService) {
+  }
 }

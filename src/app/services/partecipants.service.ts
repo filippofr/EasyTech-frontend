@@ -13,10 +13,14 @@ export class PartecipantsService {
   private _partecipants$ = new BehaviorSubject<any[]>([]);
   partecipants$ = this._partecipants$.asObservable();
 
+  private _all$ = new BehaviorSubject<any[]>([]);
+  all$ = this._all$.asObservable();
+
   constructor(private http: HttpClient) {
+    this.totalList()
   }
 
-  
+
   listCourses(courseId?: string) {
     if (courseId === '6536945f4f594167cf812e00' ||
       courseId === '6536948a4f594167cf812e03' ||
@@ -29,6 +33,13 @@ export class PartecipantsService {
       this.http.post<Partecipant18[]>(`/api/partecipant/find`, { tipologyId: courseId })
         .subscribe(partes => this._partecipants$.next(partes));
     }
+  }
+
+  totalList() {
+    this.http.post<any[]>(`/api/partecipant/findFull`, {})
+      .subscribe(part => {
+        this._all$.next(part);
+      });
   }
 
   update18(partecipantId: string, body: any) {
