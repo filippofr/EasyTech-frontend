@@ -19,12 +19,13 @@ export class NotificationsComponent {
     this.partecipantsSrv.listCourses(id)
     this.router.navigate(['course']);
   }
-
+/*
   redirectNewTab(id: any) {
     this.partecipantsSrv.listCourses(id)
-    const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/course']));
- 
-       window.open('#' + url, '_blank');
+    window.open("http://localhost:4200/course", '_blank');
+  }
+  */
+  redirectNewTab(id: any) {
+    
   }
 }
