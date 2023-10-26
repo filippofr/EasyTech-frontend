@@ -27,6 +27,7 @@ export class NotificationsComponent {
   redirect(id: any) {
     this.partecipantsSrv.listCourses(id);
     this.courseSrv.getOne(id);
+    this.notificationSrv.getUserAlert()
 
     this.router.navigate(['course']);
   }
